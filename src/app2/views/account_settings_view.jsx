@@ -3,7 +3,7 @@ import Store from '../store'
 import {observer} from 'mobx-react'
 
 @observer
-export default class AccountSecretsView extends Component {
+export default class AccountSettingsView extends Component {
   constructor(props) {
     super(props)
   }

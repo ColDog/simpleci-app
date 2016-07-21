@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import UserStore from '../store/user_store'
+import UserStore from '../../app/store/user_store'
 
 export default class Navbar extends Component {
   constructor(props) {

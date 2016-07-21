@@ -4,15 +4,17 @@ import {observable} from 'mobx'
 class Store {
   @observable account = 'me'
   @observable user = {}
-  @observable teams = []
+  @observable users = []
   @observable job_definitions = []
   @observable jobs = []
+  @observable job = {}
+  @observable job_definition = {}
   @observable events = []
   @observable tokens = []
   @observable secrets = []
 
   handleRoute(ctx) {
-    if (ctx.params.account_id != this.account) {
+    if (ctx.params.account_id && ctx.params.account_id != this.account) {
       this.account = ctx.params.account_id
     }
   }
@@ -22,12 +24,33 @@ class Store {
     this.fetch = this.fetch.bind(this)
     this.handleRoute = this.handleRoute.bind(this)
   }
+  
+  find(resource, params) {
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        method: 'GET',
+        url: Config.config.api + '/api/users/' + this.account + '/' + resource,
+        xhrFields: {
+          withCredentials: true
+        },
+        data: params,
+        success: (data) => {
+          this[resource] = data[resource]
+          resolve(this[resource])
+        },
+        error: reject
+      })
+    })
+  }
 
   fetch(resource, params) {
     return new Promise((resolve, reject) => {
       $.ajax({
         method: 'GET',
-        url: Config.config.api + '/users/' + this.account + '/' + resource,
+        url: Config.config.api + '/api/users/' + this.account + '/' + resource,
+        xhrFields: {
+          withCredentials: true
+        },
         data: params,
         success: (data) => {
           this[resource].replace(data[resource])
@@ -42,7 +65,10 @@ class Store {
     return new Promise((resolve, reject) => {
       $.ajax({
         method: 'GET',
-        url: Config.config.api + '/users/' + this.account,
+        url: Config.config.api + '/api/users/' + this.account,
+        xhrFields: {
+          withCredentials: true
+        },
         success: (data) => {
           this.user = data.user
           resolve(this.user)

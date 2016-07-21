@@ -30,7 +30,7 @@ export default class JobView extends Component {
               <table className="table">
                 <tr>
                   <td>Branch</td>
-                  <td>{this.props.job.branch}</td>
+                  <td>{this.props.job.repo.branch}</td>
                 </tr>
                 <tr>
                   <td>Project</td>

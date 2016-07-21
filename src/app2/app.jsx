@@ -1,3 +1,6 @@
+import React, {Component} from 'react'
+import Navbar from './components/navbar'
+
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -11,10 +14,6 @@ export default class App extends Component {
         </header>
         <div className="boxed">
           <div id="content-container">
-            <Sidebar items={[
-              {icon: 'building', link: () => { return "/accounts/" + AccountStore.current }},
-              {icon: 'plug', link: () => { return "/accounts/" + AccountStore.current + "/configs" }},
-            ]} />
             <div id="main">
               {this.props.main}
             </div>

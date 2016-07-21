@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import Navbar from './components/navbar'
-import Sidebar from './components/sidebar'
+import Navbar from './../app2/components/navbar'
+import Sidebar from './../app2/components/sidebar'
 import AccountStore from './store/account_store'
 
 export default class App extends Component {
