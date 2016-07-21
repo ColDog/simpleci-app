@@ -25,17 +25,18 @@ class Store {
     this.handleRoute = this.handleRoute.bind(this)
   }
   
-  find(resource, params) {
+  find(resource, id) {
     return new Promise((resolve, reject) => {
       $.ajax({
         method: 'GET',
-        url: Config.config.api + '/api/users/' + this.account + '/' + resource,
+        url: Config.config.api + '/api/users/' + this.account + '/' + resource + 's/' + id,
         xhrFields: {
           withCredentials: true
         },
-        data: params,
         success: (data) => {
-          this[resource] = data[resource]
+          Object.keys(data[resource]).forEach((key) => {
+            this[resource][key] = data[resource][key]
+          })
           resolve(this[resource])
         },
         error: reject
