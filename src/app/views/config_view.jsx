@@ -52,7 +52,7 @@ export default class ConfigView extends Component {
           {(() => {
             return AccountStore.currentConfigs.map((config) => {
               return <li key={config.id} className="list-group-item" onClick={this.setCurrent.bind(this, config)}>
-                <a>{config.name}</a>
+                <a>{config.id}: {config.name}</a>
               </li>
             })
           })()}

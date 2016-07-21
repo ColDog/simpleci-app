@@ -1,8 +1,3 @@
-import React, {Component} from 'react'
-import Navbar from './components/navbar'
-import Sidebar from './components/sidebar'
-import AccountStore from './store/account_store'
-
 export default class App extends Component {
   constructor(props) {
     super(props);

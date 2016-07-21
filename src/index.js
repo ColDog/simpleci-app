@@ -2,53 +2,33 @@ import page from 'page'
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import DashboardView from './app/views/dashboard_view'
-import AccountView from './app/views/account_view'
-import ConfigView from './app/views/config_view'
-import JobView from './app/views/job_view'
-import App from './app/app'
+import JobIndexView from 'app2/views/job_index_view'
+import JobView from 'app2/views/job_view'
+import AccountSettingsView from 'app2/views/account_secrets_view'
 
-import UserStore from './app/store/user_store'
-import AccountStore from './app/store/account_store'
-import Config from './app/config/config'
-import Job from "./app/models/job";
+import Config from './app2/config'
+import App from './app2/app'
+import Store from './app2/store'
 
-Object.defineProperty(Object.prototype, 'try', {
-  value: function(key) {
-    try {
-      return Function('ctx', 'return ctx.' + key)(this)
-    } catch (e) {
-      return null
-    }
-  },
-  enumerable: false
-});
-
+import './styles/main.css'
 
 page('/', () => {
-  UserStore.fetchTeams().then(() => {
-    ReactDOM.render(<App main={<DashboardView />}/>, document.getElementById('root'))
-  })
+  
+  ReactDOM.render(<App main={<DashboardView />}/>, document.getElementById('root'))
 })
 
-page('/repos/:repo_id/jobs/:job_id', (ctx) => {
-  Job.find(ctx.params.repo_id, ctx.params.job_id).then((job) => {
-    ReactDOM.render(<App main={<JobView job={job} />}/>, document.getElementById('root'))
-  })
+page('/accounts/:account_id/jobs', () => {
+  ReactDOM.render(<App main={<JobIndexView />}/>, document.getElementById('root'))
 })
 
-page('/accounts/:account', (ctx) => {
-  AccountStore.fetchRepos(ctx.params.account).then(() => {
-    ReactDOM.render(<App main={<AccountView />}/>, document.getElementById('root'))
-  })
+page('/accounts/:account_id/jobs/:job_id', () => {
+  ReactDOM.render(<App main={<JobView />}/>, document.getElementById('root'))
 })
 
-page('/accounts/:account/configs', (ctx) => {
-  AccountStore.fetchConfigs(ctx.params.account).then(() => {
-    ReactDOM.render(<App main={<ConfigView />}/>, document.getElementById('root'))
-  })
+page('/accounts/:account_id/settings', () => {
+  ReactDOM.render(<App main={<AccountSettingsView />}/>, document.getElementById('root'))
 })
 
 Config.fetchConfig()
-  .then(UserStore.fetchCurrent)
+  .then(Store.fetchCurrent)
   .then(page.start)

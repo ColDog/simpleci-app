@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
 import AccountStore from '../store/account_store'
-import Tabs from '../components/tabs'
+import Tabs from '../../app2/components/tabs'
 import Builds from '../components/builds'
 import JobBranches from '../components/job_branches'
 import Branches from '../components/branches'
+import BuildSettings from '../components/build_settings'
 
 export default class AccountView extends Component {
   state = {current: null}
@@ -48,11 +49,12 @@ export default class AccountView extends Component {
                 <h4 className="pull-right">{this.state.current.name}</h4>
 
                 <Tabs
-                  tabs={["Overview", "History", "Branches"]}
+                  tabs={["Overview", "History", "Branches", "Settings"]}
                   components={[
                     <JobBranches job_branches={this.state.current.job_branches} />,
                     <Builds jobs={this.state.current.jobs} />,
-                    <Branches branches={this.state.current.branches} repo={this.state.current} />
+                    <Branches branches={this.state.current.branches} repo={this.state.current} />,
+                    <BuildSettings repo={this.state.current} />
                   ]}
                 />
               </div>

@@ -1,17 +1,35 @@
-import Config from '../config/config'
+import Config from '../../app2/config'
 import {observable} from 'mobx'
 import Job from "./job"
 import {all, notify} from '../library/helpers'
+import AccountStore from '../store/account_store'
 
 export default class Repo {
   @observable jobs = []
   @observable branches = []
   @observable job_branches = []
-  
+  @observable config_id = null
+
   constructor(repo) {
     Object.assign(this, repo)
     this.fetchJobs = this.fetchJobs.bind(this)
     this.fetchBranches = this.fetchBranches.bind(this)
+  }
+  
+  update(params) {
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        method: 'PATCH',
+        url: Config.config.api + '/accounts/' + AccountStore.current + '/repos/' + this.id,
+        data: {repo: params},
+        success: (data) => {
+          Object.assign(this, data.repo)
+          resolve(data)
+        },
+        error: () => {
+        }
+      })
+    })    
   }
   
   buildBranch(branch) {
@@ -20,6 +38,16 @@ export default class Repo {
         notify('success', 'Jobs Queued')
         resolve(data)
         this.fetchJobs()
+      })
+    })
+  }
+
+  fetch() {
+    return new Promise((resolve, reject) => {
+      $.get(Config.config.api + '/repos/' + this.id, (data) => {
+        this.jobs = data.jobs.map(job => new Job(job))
+        this.populateJobBranches()
+        resolve(data)
       })
     })
   }

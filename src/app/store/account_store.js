@@ -1,4 +1,4 @@
-import Config from '../config/config'
+import Config from '../../app2/config'
 import Repo from '../models/repo'
 
 class AccountStore {

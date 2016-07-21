@@ -1,0 +1,14 @@
+#sidebar {
+    position: fixed;
+    height: 100%;
+    width: 50px;
+}
+
+#main {
+    padding-left: 60px;
+    padding-top: 50px;
+}
+
+.navbar {
+    margin-bottom: 0 !important;
+}

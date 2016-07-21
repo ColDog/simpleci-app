@@ -1,15 +1,13 @@
 import React, {Component} from 'react'
-import Tabs from '../../app2/components/tabs'
+import Tabs from '../components/tabs'
 import {observer} from 'mobx-react'
+import Store from '../store'
+
 
 @observer
 export default class JobView extends Component {
   constructor(props) {
     super(props)
-  }
-
-  componentWillMount() {
-    this.props.job.fetchOutput()
   }
 
   render() {
