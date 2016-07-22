@@ -25,6 +25,40 @@ class Store {
     this.handleRoute = this.handleRoute.bind(this)
   }
   
+  create(resource, params) {
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        method: 'POST',
+        url: Config.config.api + '/api/users/' + this.account + '/' + resource,
+        xhrFields: {
+          withCredentials: true
+        },
+        data: params,
+        success: (data) => {
+          this.fetch(resource)
+          resolve(data)
+        },
+        error: reject
+      })
+    })
+  }
+  
+  destroy(resource, id) {
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        method: 'DELETE',
+        url: Config.config.api + '/api/users/' + this.account + '/' + resource + '/' + id,
+        xhrFields: {
+          withCredentials: true
+        },
+        success: (data) => {
+          this.fetch(resource).then(resolve)
+        },
+        error: reject
+      })
+    })
+  }
+  
   find(resource, id) {
     return new Promise((resolve, reject) => {
       $.ajax({

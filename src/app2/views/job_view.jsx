@@ -47,6 +47,10 @@ export default class JobView extends Component {
                     <table>
                       <tbody>
                       <tr>
+                        <td>Job Family:&nbsp;&nbsp;</td>
+                        <td><a href={"/accounts/" + this.props.account + "/jobs/" + this.props.job.job_family}>{this.props.job.job_family}</a></td>
+                      </tr>
+                      <tr>
                         <td>Branch:&nbsp;&nbsp;</td>
                         <td>{this.props.job.repo.branch}</td>
                       </tr>
@@ -85,9 +89,23 @@ export default class JobView extends Component {
         <div className="col-sm-9">
           {(() => {
             if (this.state.view == 'logs') {
-              return <pre><code>...</code></pre>
+              return <div className="panel panel-default">
+                <div className="panel-heading">
+                  <div className="panel-title">Build Logs</div>
+                </div>
+                <div className="panel-body">
+                  <pre><code>...</code></pre>
+                </div>
+              </div>
             } else if (this.state.view == 'config') {
-              return <pre><code>{JSON.stringify(this.props.job.build, null, 2)}</code></pre>
+              return <div className="panel panel-default">
+                <div className="panel-heading">
+                  <div className="panel-title">Build Configuration</div>
+                </div>
+                <div className="panel-body">
+                  <pre><code>{JSON.stringify(this.props.job.build, null, 2)}</code></pre>
+                </div>
+              </div>
             } else {
               return <h5>Coming Soon!</h5>
             }

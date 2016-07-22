@@ -25,6 +25,19 @@ export default class JobIndexView extends Component {
       </div>
 
       <div className="col-sm-9">
+        {(() => {
+          if (this.props.job_definitions.length == 0) {
+            return <div className="panel panel-danger">
+              <div className="panel-heading">
+                <h4 className="panel-title">You don't have any registered jobs!</h4>
+              </div>
+              <div className="panel-body">
+                <p>To register a job, use the instructions explained by the CLI interface.</p>
+              </div>
+            </div>
+          }
+        })()}
+
         <div className="panel panel-default">
           <div className="panel-heading">
             <h4 className="panel-title">Pending</h4>

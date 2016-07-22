@@ -10,7 +10,7 @@ export default class App extends Component {
     return (
       <div id="container" className="effect mainnav-lg">
         <header id="navbar">
-          <Navbar />
+          <Navbar user={this.props.user} />
         </header>
         <div className="boxed">
           <div id="content-container">
