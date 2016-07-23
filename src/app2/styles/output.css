@@ -1,0 +1,14 @@
+#output {
+    background-color: #333;
+    color: #eee;
+    padding: 15px;
+}
+
+.output-text {
+    font-weight: 300;
+}
+
+pre {
+    background-color: #333;
+    color: #eee;
+}

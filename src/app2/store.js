@@ -12,6 +12,7 @@ class Store {
   @observable events = []
   @observable tokens = []
   @observable secrets = []
+  pollers = {}
 
   handleRoute(ctx) {
     if (ctx.params.account_id && ctx.params.account_id != this.account) {
@@ -23,6 +24,22 @@ class Store {
     this.fetchCurrent = this.fetchCurrent.bind(this)
     this.fetch = this.fetch.bind(this)
     this.handleRoute = this.handleRoute.bind(this)
+  }
+
+  poll(resource, params) {
+    this.pollers[resource] = () => {
+      this.fetch(resource, params).then(() => {
+        if (this.pollers[resource]) {
+          setTimeout(this.pollers[resource], 5000)
+        }
+      })
+    }
+
+    setTimeout(this.pollers[resource], 5000)
+  }
+
+  stopPolling(resource) {
+    this.pollers[resource] = null
   }
   
   create(resource, params) {

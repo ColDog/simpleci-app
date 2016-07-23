@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {observer} from 'mobx-react'
+import Store from '../store'
 
 
 @observer
@@ -7,6 +8,10 @@ export default class JobDefinitionView extends Component {
   state = {view: 'jobs'}
   constructor(props) {
     super(props)
+  }
+
+  componentWillUnmount() {
+    Store.stopPolling('jobs')
   }
 
   setView(view) {
@@ -56,7 +61,7 @@ export default class JobDefinitionView extends Component {
 
         if (this.state.view == 'config') {
           return <div className="col-sm-9">
-            <pre><code>{JSON.stringify(this.props.job_definition.build, null, 2)}</code></pre>
+            <pre><code>{JSON.stringify(this.props.job_definition, null, 2)}</code></pre>
           </div>
         } else {
           return <div className="col-sm-9">

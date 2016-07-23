@@ -8,6 +8,14 @@ export default class JobIndexView extends Component {
     super(props)
     console.log('props', props)
   }
+  
+  componentWillMount() {
+    Store.poll('job_definitions')
+  }
+
+  componentWillUnmount() {
+    Store.stopPolling('job_definitions')
+  }
 
   render() {
     return <div className="container-fluid">

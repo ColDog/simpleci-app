@@ -13,6 +13,7 @@ import Config from './app2/config'
 import App from './app2/app'
 import Store from './app2/store'
 
+import './app2/styles/output.css'
 
 $.fn.serializeObject = function() {
   var o = {};
@@ -52,6 +53,7 @@ page('/accounts/:account_id/jobs/:job_def_id', (ctx) => {
   Store.handleRoute(ctx)
   Store.find('job_definition', ctx.params.job_def_id)
   Store.fetch('jobs', {query: {job_family: ctx.params.job_def_id}})
+  Store.poll('jobs', {query: {job_family: ctx.params.job_def_id}})
   ReactDOM.render(<App user={Store.user} main={<JobDefinitionView account={Store.account} job_definition={Store.job_definition} jobs={Store.jobs} />}/>, document.getElementById('root'))
 })
 
@@ -63,9 +65,7 @@ page('/accounts/:account_id/jobs/:job_def_id/config', (ctx) => {
 
 page('/accounts/:account_id/jobs/:job_def_id/:job_id', (ctx) => {
   Store.handleRoute(ctx)
-  Store.find('job', ctx.params.job_id).then(() => {
-    ReactDOM.render(<App user={Store.user} main={<JobView account={Store.account} job={Store.job} />}/>, document.getElementById('root'))
-  })
+  ReactDOM.render(<App user={Store.user} main={<JobView account={Store.account} job_family={ctx.params.job_def_id} job_id={ctx.params.job_id} />}/>, document.getElementById('root'))
 })
 
 page('/accounts/:account_id/settings', (ctx) => {
