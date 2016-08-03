@@ -1,0 +1,40 @@
+#output {
+  background-color: #333;
+  color: #eee;
+  padding: 15px;
+}
+
+.output-text {
+  font-weight: 300;
+}
+
+pre {
+  background-color: #333;
+  color: #eee;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.42;
+  border-radius: 50px;
+}
+
+code { white-space: pre; }
+
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+.full {
+  height: 100%;
+  width: 100%;
+}
+
+.bottom-corner {
+  position: fixed; bottom: 20px; right: 20px;
+}

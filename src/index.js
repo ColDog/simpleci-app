@@ -2,18 +2,18 @@ import page from 'page'
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 
-import JobIndexView from './app2/views/job_index_view'
-import JobView from './app2/views/job_view'
-import JobDefinitionView from './app2/views/job_definition_view'
-import AccountSettingsView from './app2/views/account_settings_view'
-import DashboardView from './app2/views/dashboard_view'
-import LoginView from './app2/views/login_view'
+import JobIndexView from 'app/views/job_index_view'
+import JobView from 'app/views/job_view'
+import JobDefinitionView from 'app/views/job_definition_view'
+import AccountSettingsView from 'app/views/account_settings_view'
+import DashboardView from 'app/views/dashboard_view'
+import LoginView from 'app/views/login_view'
 
-import Config from './app2/config'
-import App from './app2/app'
-import Store from './app2/store'
+import Config from 'app/config'
+import App from 'app/app'
+import Store from 'app/store'
 
-import './app2/styles/output.css'
+import './index.css'
 
 $.fn.serializeObject = function() {
   var o = {};
